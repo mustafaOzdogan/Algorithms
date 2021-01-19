@@ -1,29 +1,36 @@
 package com.algorithm;
 
-import java.util.ArrayList;
+public class Program
+{
 
-public class Main {
-
-    private static final String SPACE_CHARACTER = " ";
-    private static final String STAR_CHARACTER = "*";
+    public static final String SPACE_CHARACTER = " ";
+    public static final String STAR_CHARACTER = "*";
 
     public static void main(String[] args)
     {
-        int height = 10;
+        try
+        {
+            int height = 0;
 
-        String[][] tree = createTree(height);
+            String[][] tree = createTree(height);
 
-        printTree(tree, height);
+            printTree(tree, height);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    private static String[][] createTree(int height)
+    public static String[][] createTree(int height) throws Exception
     {
-        int width = calculateWidth(height);
-
-        String[][] tree = new String[height][width];
+        if(height <= 0)
+            throw new Exception("Height of tree should be more than zero!");
 
         // initialize with elements with " "
-        initializeTree(tree, height, width);
+        String[][] tree = initializeTree(height);
+
+        int width = calculateWidth(height);
 
         int leftOffset  = 0;
         int rightOffset = width - 1;
@@ -43,8 +50,11 @@ public class Main {
         return tree;
     }
 
-    private static void initializeTree(String[][] tree, int height, int width)
+    public static String[][] initializeTree(int height)
     {
+        int width = calculateWidth(height);
+        String[][] tree = new String[height][width];
+
         for(int i = 0; i < height; i++)
         {
             for(int j = 0; j < width; j++)
@@ -52,9 +62,11 @@ public class Main {
                 tree[i][j] = SPACE_CHARACTER;
             }
         }
+
+        return tree;
     }
 
-    private static void printTree(String[][] tree, int height)
+    public static void printTree(String[][] tree, int height)
     {
         int width = calculateWidth(height);
 
@@ -68,8 +80,11 @@ public class Main {
         }
     }
 
-    private static int calculateWidth(int height)
+    public static int calculateWidth(int height)
     {
-        return 2 * (height - 1) + 1;
+        if(height <= 0)
+            return 0;
+        else
+            return 2 * (height - 1) + 1;
     }
 }
