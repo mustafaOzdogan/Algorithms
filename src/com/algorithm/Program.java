@@ -10,7 +10,8 @@ public class Program
     {
         try
         {
-            int height = 0;
+            // Set height and let program works
+            int height = 5;
 
             String[][] tree = createTree(height);
 
